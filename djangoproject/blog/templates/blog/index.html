@@ -1,0 +1,79 @@
+{%extends 'blog/base.html'%} {% load static %} {%block content%}
+<section class="bg-text-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="bg-text">
+          <h3>Classic BLOG Design</h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="blog-post-area">
+  <div class="container">
+    <div class="row">
+      <a href="{% url 'create' %}" class="btn btn-primary">Create post</a>
+      <div class="blog-post-area-style">
+        {% for post in posts %}
+        <div class="col-md-3">
+          <div class="single-post">
+            <img src="{{post.image.url}}" alt="" width="300px" height="201px" />
+            <h3><a href="{% url 'single' post.id %}">{{ post.title }}</a></h3>
+            <h4>
+              <span
+                >Posted By:
+                <span class="author-name">{{ post.author }}</span></span
+              >
+            </h4>
+            <p>{{ post.content }}</p>
+            {% if post.author == user %}
+            <p>
+              <a
+                href="{% url 'update' post.id %}"
+                class="btn btn-outline-primary"
+                >Edit</a
+              >
+              <a href="{% url 'delete' post.id %}" class="btn btn-danger"
+                >Delete</a
+              >
+            </p>
+            {% endif %}
+            <h4><span>{{ post.date }}</span></h4>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <div class="pegination">
+    <!--
+        <ul>
+            <li><i class="fa fa-angle-left" aria-hidden="true"></i></li>
+            <li class="active">1</li>
+            <li>2</li>
+            <li>3</li>
+            <li><i class="fa fa-angle-right" aria-hidden="true"></i></li>
+        </ul>
+-->
+
+    <div class="nav-links">
+      <span class="page-numbers current">1</span>
+      <a class="page-numbers" href="#">2</a>
+      <a class="page-numbers" href="#">3</a>
+      <a class="page-numbers" href="#">4</a>
+      <a class="page-numbers" href="#">5</a>
+      <a class="page-numbers" href="#"
+        ><i class="fa fa-angle-right" aria-hidden="true"></i
+      ></a>
+    </div>
+  </div>
+</section>
+{%endblock content%}
